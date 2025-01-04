@@ -57,13 +57,12 @@ public class MySecurityConfig {
             // Add JWT filter before UsernamePasswordAuthenticationFilter
             .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/scss/**").permitAll()
                 .requestMatchers("/register", "/token", "/refreshtoken", "/index/**", "/settings/**", "/").permitAll()
-                .requestMatchers("/v2/health/**", "/v2/nef/**").permitAll()
+//                .requestMatchers("/v2/health/**", "/v2/nef/**").permitAll()
                 // Uncomment for Swagger documentation endpoints (for development, not production)
                 //.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .requestMatchers("/edge/**", "/userdetails/**", "/change-password/**",
-                    "/v2/alarm_manager/**", "/v2/5gcore/key/opc/**").hasRole("NORMAL")
+                .requestMatchers("/data/**", "/userdetails/**", "/change-password/**",
+                    "/v2/service/**", "/v2/features/**").hasRole("NORMAL")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
